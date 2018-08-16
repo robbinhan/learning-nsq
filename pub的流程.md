@@ -78,6 +78,7 @@ func (t *Topic) PutMessage(m *Message) error {
 
 func (t *Topic) put(m *Message) error {
 	select {
+        // m没有读到数据的时候，会走default
 	case t.memoryMsgChan <- m:
 	default:
 		b := bufferPoolGet()
